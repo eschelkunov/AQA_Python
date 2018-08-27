@@ -13,8 +13,8 @@ def generate_fibonacci(length):
             b = c
             fib.append(c)
         print(fib)
+        return fib
     else:
         print('Your argument must be bigger then 0!')
 
 
-generate_fibonacci(10)
