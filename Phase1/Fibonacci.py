@@ -3,8 +3,8 @@
 
 
 def main():
-    print(list(generate_fibonacci(10)))
-    print(list(test(10)))
+    print(generate_fibonacci(10))
+    print(generate_fibonacci(-5))
 
 
 def generate_fibonacci(length):
