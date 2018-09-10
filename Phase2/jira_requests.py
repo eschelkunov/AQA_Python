@@ -25,3 +25,7 @@ class Jira_requests:
     def update_ticket(self, key, json_data):
         response = requests.put(self.createIssueURL+key, headers=self.header, data=json_data, auth=self.auth)
         return response
+
+    def delete_ticket(self, key):
+        response = requests.delete(self.createIssueURL + key, auth=self.auth)
+        return response.status_code

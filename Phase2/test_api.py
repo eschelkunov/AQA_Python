@@ -19,7 +19,8 @@ class Test_API:
     logger = logging.getLogger()
 
     def get_id(self):
-        return self.issueID[0]
+        if len(self.issueID) > 0:
+            return self.issueID[0]
 
     def set_id(self, id):
         self.issueID.append(id)
@@ -75,6 +76,13 @@ class Test_API:
         logging.info('Changing priority to: ' + new_value)
         response = request.update_ticket(self.get_id(), Json_fixtures.update_priority_json(new_value))
         assert 204 == response.status_code
+
+    def teardown_class(self):
+        logging.info('Making cleanUp....')
+        response = request.delete_ticket(self.get_id(self))
+        logging.info('Ticket with id ' + self.get_id(self) + ' has been removed!') if response == 204 else \
+            logging.warning('Ticket could not be removed due to response code: ' + response + '!')
+
 
 
 
