@@ -19,13 +19,13 @@ class Jira_requests:
         return response
 
     def search_for_ticket(self, key):
-        response = requests.get(self.searchIssueURL+key, auth=self.auth)
+        response = requests.get(self.searchIssueURL+str(key), auth=self.auth)
         return response
 
     def update_ticket(self, key, json_data):
-        response = requests.put(self.createIssueURL+key, headers=self.header, data=json_data, auth=self.auth)
+        response = requests.put(self.createIssueURL+str(key), headers=self.header, data=json_data, auth=self.auth)
         return response
 
     def delete_ticket(self, key):
-        response = requests.delete(self.createIssueURL + key, auth=self.auth)
+        response = requests.delete(self.createIssueURL + str(key), auth=self.auth)
         return response.status_code
