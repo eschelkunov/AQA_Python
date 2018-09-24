@@ -1,3 +1,4 @@
+selenium
 altgraph==0.10.2
 apipkg==1.5
 astroid==2.0.2
