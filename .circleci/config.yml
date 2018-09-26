@@ -48,7 +48,8 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            pytest -n 4 --dist=loadscope -r 2 -l -v
+#            pytest -n 4 --dist=loadscope -r 2 -l -v
+            pytest -v -l tests/ui/tests_ui
 
 
       - store_artifacts:

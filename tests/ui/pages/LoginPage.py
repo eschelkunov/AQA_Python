@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-from ui.Waits import Waits
+from tests.ui.Waits import Waits
 
 
 class LoginPage(object):
