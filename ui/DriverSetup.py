@@ -15,7 +15,7 @@ class DriverSetup:
         chromedriver = dir_path + "/chromedriver"
         os.environ["webdriver.chrome.driver"] = chromedriver
         self.driver = webdriver.Chrome(options=options, executable_path=chromedriver)
-        self.driver.implicitly_wait(20)
+        self.driver.implicitly_wait(10)
         self.driver.maximize_window()
 
         yield  # everything after 'yield' is executed on tear-down

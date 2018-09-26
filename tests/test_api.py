@@ -37,7 +37,7 @@ class Test_API:
     @pytest.mark.parametrize("summary, code", [
         ('EvgeniyTest', 201),
         ('', 400),
-        ('Summury' * 100, 400),
+        ('Summary' * 100, 400),
     ])
     def test_create_ticket(self, summary, code):
         logging.info('Testing creation of the issue with summary: ' + summary)
@@ -60,7 +60,7 @@ class Test_API:
         logging.info('Searching for few issues and validation count is more or equals 5...')
         response = request.search_for_ticket('reporter=' + self.User)
         count = len(response.json().get("issues"))
-        assert count >= 2
+        assert count >= 5
 
     @pytest.mark.parametrize("field, new_value", [
         ('summary', 'Updated summary'),

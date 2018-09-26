@@ -22,12 +22,12 @@ class Test_Login_Page(DriverSetup):
         (User, Password, successful_login),
     ]
 
-    @pytest.mark.parametrize("user, password, result", test_data)
-    def test_first(self, user, password, result):
-        logging.info('\nTesting login with user: ' + user + ' password: ' + password)
+    @pytest.mark.parametrize("user, password, expected_title", test_data)
+    def test_login(self, user, password, expected_title):
+        logging.info('\nTesting login with user: ' + user + ' and password: ' + password)
         login_page = LoginPage(self.driver)
-        result = login_page.doLogin(user, password, result)
-        assert result is True
+        result_title = login_page.doLogin(user, password)
+        assert expected_title == result_title
 
 
 if __name__ == "__main__":
