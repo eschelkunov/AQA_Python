@@ -49,7 +49,7 @@ jobs:
           command: |
             . venv/bin/activate
             ls
-            chmod -R 777 /webdrivers/chromedriver_linux
+            chmod -R 777 ./ui/webdrivers/chromedriver_linux
             pytest -v -l ui/tests_ui/
 
 
