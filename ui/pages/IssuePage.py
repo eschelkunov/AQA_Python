@@ -1,6 +1,6 @@
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from tests.ui.Waits import Waits
+from ui.Waits import Waits
 from random import randint
 
 

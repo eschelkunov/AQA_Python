@@ -1,6 +1,6 @@
-from tests.ui.pages.LoginPage import LoginPage
-from tests.ui.pages.IssuePage import IssuesPage
-from tests.ui.DriverSetup import DriverSetup
+from ui.pages.LoginPage import LoginPage
+from ui.pages.IssuePage import IssuesPage
+from ui.DriverSetup import DriverSetup
 import unittest
 import pytest
 import logging

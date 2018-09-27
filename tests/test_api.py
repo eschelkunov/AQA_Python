@@ -1,7 +1,7 @@
 import pytest
 from random import randint
-from code.jira_requests import Jira_requests
-from code.json_fixtures import *
+from my_code.jira_requests import Jira_requests
+from my_code.json_fixtures import *
 import logging
 
 request = Jira_requests()
