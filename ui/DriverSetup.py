@@ -1,3 +1,4 @@
+import platform
 import os
 import pytest
 from selenium import webdriver
@@ -12,7 +13,7 @@ class DriverSetup:
         options.add_argument('--ignore-ssl-errors')
         options.add_argument('start-maximized')
         dir_path = os.path.dirname(os.path.realpath(__file__))
-        if os.name == "posix":
+        if platform.system() == "Darwin":
             chromedriver = dir_path + "/webdrivers/chromedriver"
             os.environ["webdriver.chrome.driver"] = chromedriver
             self.driver = webdriver.Chrome(options=options, executable_path=chromedriver)
