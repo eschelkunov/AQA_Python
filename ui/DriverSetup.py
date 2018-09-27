@@ -12,11 +12,17 @@ class DriverSetup:
         options.add_argument('--ignore-ssl-errors')
         options.add_argument('start-maximized')
         dir_path = os.path.dirname(os.path.realpath(__file__))
-        chromedriver = dir_path + "/chromedriver"
-        os.environ["webdriver.chrome.driver"] = chromedriver
-        self.driver = webdriver.Chrome(options=options, executable_path=chromedriver)
+        if os.name == "posix":
+            chromedriver = dir_path + "/chromedriver"
+            os.environ["webdriver.chrome.driver"] = chromedriver
+            self.driver = webdriver.Chrome(options=options, executable_path=chromedriver)
+        else:
+            chromedriver = dir_path + "/chromedriver_linux"
+            os.environ["webdriver.chrome.driver"] = chromedriver
+            self.driver = webdriver.Chrome(options=options, executable_path=chromedriver)
         self.driver.implicitly_wait(10)
         self.driver.maximize_window()
+
 
         yield  # everything after 'yield' is executed on tear-down
 
