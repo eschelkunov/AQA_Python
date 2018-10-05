@@ -34,6 +34,13 @@ jobs:
             . venv/bin/activate
             pip install -r requirements.txt
 
+      - run:
+          name: install allure
+          command: |
+            curl -o allure-2.7.0.zip -Ls https://bintray.com/qameta/generic/download_file?file_path=io%2Fqameta%2Fallure%2Fallure%2F2.7.0%2Fallure-2.7.0.zip
+            unzip allure-2.7.0.zip
+            chmod -R 777 ./allure-2.7.0/bin/
+
       - save_cache:
           paths:
             - ./venv
@@ -48,11 +55,16 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            ls
             chmod -R 777 ./ui/webdrivers/chromedriver_linux
-            pytest -v -l ui/tests_ui/
+            pytest -v -l ./ui/tests_ui/ --alluredir=/tmp/my_allure_results
+
+      - run:
+          name: generate report
+          command: |
+            ./allure-2.7.0/bin/allure generate -c /tmp/my_allure_results -o /tmp/my_allure_report
+          when: always
 
 
       - store_artifacts:
-          path: test-reports
-          destination: test-reports
+          path: /tmp/my_allure_report
+          destination: allure_report

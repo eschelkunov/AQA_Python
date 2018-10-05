@@ -1,3 +1,5 @@
+import allure
+
 from ui.pages.LoginPage import LoginPage
 from ui.DriverSetup import DriverSetup
 import unittest
@@ -5,6 +7,7 @@ import pytest
 import logging
 
 
+@allure.story('UI Login tests')
 class Test_Login_Page(DriverSetup):
     User = 'Evgeniy_Shchelkunov'
     Password = 'Password1@'
@@ -22,6 +25,8 @@ class Test_Login_Page(DriverSetup):
         (User, Password, successful_login),
     ]
 
+    @allure.step
+    @allure.title('test login UI')
     @pytest.mark.parametrize("user, password, expected_title", test_data)
     def test_login(self, user, password, expected_title):
         logging.info('\nTesting login with user: ' + user + ' and password: ' + password)

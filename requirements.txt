@@ -1,3 +1,5 @@
+allure-pytest==2.5.2
+allure-python-commons==2.5.2
 altgraph==0.10.2
 apipkg==1.5
 astroid==2.0.2
@@ -31,6 +33,7 @@ pytest-rerunfailures==4.1
 pytest-xdist==1.23.0
 requests==2.19.1
 selenium==3.14.1
+seleniumwrapper==0.5.4
 six==1.11.0
 typed-ast==1.1.0
 typing==3.6.4
