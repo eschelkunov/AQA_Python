@@ -56,7 +56,7 @@ jobs:
           command: |
             . venv/bin/activate
             chmod -R 777 ./ui/webdrivers/chromedriver_linux
-            pytest -v -l /ui/tests_ui/ --alluredir=/tmp/my_allure_results
+            pytest -v -l ./ui/tests_ui/ --alluredir=/tmp/my_allure_results
 
       - run:
           name: generate report
