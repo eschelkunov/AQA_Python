@@ -14,7 +14,7 @@ class Test_API:
     Password = 'Password1@'
     Wrong_user = 'Evgeniy'
     Wrong_password = 'pass112233'
-    _issueID = []
+    issue_ID = []
 
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger()
@@ -41,14 +41,14 @@ class Test_API:
         logging.info('Testing creation of the issue with summary: ' + summary)
         response = request.create_ticket(Json_fixtures.create_ticket_json(summary))
         if response.status_code == 201:
-            self._issueID.append(response.json().get('id'))
+            self.issue_ID.append(response.json().get('id'))
         assert code == response.status_code
 
     @allure.step
     @allure.title('search for ticket API')
     def test_search_for_ticket(self):
-        logging.info('Searching for the issue with id: ' + str(self._issueID[0]))
-        response = request.search_for_ticket('id=' + str(self._issueID[0]))
+        logging.info('Searching for the issue with id: ' + str(self.issue_ID[0]))
+        response = request.search_for_ticket('id=' + str(self.issue_ID[0]))
         assert 200 == response.status_code
 
     @allure.step
@@ -74,7 +74,7 @@ class Test_API:
     ])
     def test_update_ticket_fields(self, field, new_value):
         logging.info('Updating field ' + field + ' with the new value: ' + new_value)
-        response = request.update_ticket(self._issueID[0], Json_fixtures.update_ticket_json(field, new_value))
+        response = request.update_ticket(self.issue_ID[0], Json_fixtures.update_ticket_json(field, new_value))
         assert 204 == response.status_code
 
     @allure.step
@@ -82,7 +82,7 @@ class Test_API:
     @pytest.mark.parametrize("new_value", ['High', 'Highest'])
     def test_update_priority(self, new_value):
         logging.info('Changing priority to: ' + new_value)
-        response = request.update_ticket(self._issueID[0], Json_fixtures.update_priority_json(new_value))
+        response = request.update_ticket(self.issue_ID[0], Json_fixtures.update_priority_json(new_value))
         assert 204 == response.status_code
 
     @allure.step
@@ -95,4 +95,4 @@ class Test_API:
         assert 2 == num
 
     def teardown_class(self):
-        request.delete_ticket(self._issueID[0])
+        request.delete_ticket(self.issue_ID[0])

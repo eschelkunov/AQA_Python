@@ -43,11 +43,12 @@ class IssuesPage(object):
             return True
         return False
 
-    def search_for_ticket(self, ticket):
-        Waits.waitForElementIsVisible(self.driver, self.search). \
-            send_keys(self.issue_key[0] + Keys.ENTER) if (ticket == 'my_ticket') else \
-            Waits.waitForElementIsVisible(self.driver, self.search). \
-                send_keys('abc' + str(randint(0, 100) * 12) + Keys.ENTER)
+    def search_for_ticket(self, ticket, id):
+        if (ticket == 'my_ticket'):
+            self.issue_key.append(id)
+            Waits.waitForElementIsVisible(self.driver, self.search).send_keys(id + Keys.ENTER)
+        else:
+            Waits.waitForElementIsVisible(self.driver, self.search).send_keys('abc' + str(randint(0, 100) * 12) + Keys.ENTER)
         return Waits.elementIsPresent(self.driver, self.search_validation_point)
 
     def search_for_few_ticket(self):
@@ -56,7 +57,7 @@ class IssuesPage(object):
         return len(Waits.waitForElementsArePresent(self.driver, self.my_issue))
 
     def update_ticket(self, goal):
-        self.search_for_ticket('my_ticket')
+        self.search_for_ticket('my_ticket', self.issue_key[0])
         result = False
         Waits.waitForElementIsClickable(self.driver, self.edit_issue_button).click()
         if goal == 'summary':
@@ -68,7 +69,7 @@ class IssuesPage(object):
         return result
 
     def delete_ticket(self):
-        self.search_for_ticket('my_ticket')
+        self.search_for_ticket('my_ticket', self.issue_key[0])
         Waits.waitForElementIsVisible(self.driver, self.more_button).click()
         Waits.waitForElementIsClickable(self.driver, self.delete_issue).click()
         Waits.waitForElementIsVisible(self.driver, self.delete_issue_submit).click()

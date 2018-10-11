@@ -8,6 +8,7 @@ import pytest
 import logging
 
 
+@pytest.mark.usefixtures('prepare_issue')
 @allure.story('UI Issue tests')
 class Test_Issues_Page(DriverSetup):
     logging.basicConfig(level=logging.INFO)
@@ -17,7 +18,9 @@ class Test_Issues_Page(DriverSetup):
     test_data_create_ticket = [('', False), ('TooLongSummary' * 100, False), ('EugeneTestUI', True)]
     test_data_search_ticket = [('my_ticket', True), ('unknown', False)]
     test_data_update_ticket = [('summary', True), ('priority', True), ('assignee', True)]
+    issue_key = []
 
+    @unittest.skip('Skipped due to API is used to prepare ticket')
     @allure.step
     @allure.title('create ticket UI')
     @pytest.mark.parametrize("summary, expected_result", test_data_create_ticket)
@@ -33,7 +36,7 @@ class Test_Issues_Page(DriverSetup):
     def test_search_for_ticket(self, ticket, expected_result):
         logging.info('\nSearching for ticket: ' + str(ticket))
         LoginPage(self.driver).doLogin(*self.credentials)
-        result = IssuesPage(self.driver).search_for_ticket(ticket)
+        result = IssuesPage(self.driver).search_for_ticket(ticket, self.issue_key[0])
         assert expected_result == result
 
     @allure.step
@@ -51,6 +54,7 @@ class Test_Issues_Page(DriverSetup):
         LoginPage(self.driver).doLogin(*self.credentials)
         assert IssuesPage(self.driver).update_ticket(goal) is expected_result
 
+    @unittest.skip('Skipped due to API cleanup is used')
     @allure.step
     @allure.title('delete ticket UI')
     def test_delete_ticket(self):
