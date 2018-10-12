@@ -28,4 +28,4 @@ class Jira_requests:
 
     def delete_ticket(self, key):
         response = requests.delete(self.createIssueURL + str(key), auth=self.auth)
-        return response.status_code
+        return response
